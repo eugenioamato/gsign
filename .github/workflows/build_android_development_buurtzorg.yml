@@ -29,9 +29,10 @@ jobs:
           encodedString: ${{ secrets.keystores }}
       - name: unzip keys
         run: |
-          echo ${{ env.RUNNER_TEMP }}
+          ls
           cd android
           cd app
+          ls
           unzip keys.zip
       - name: Build Android App
         run: flutter build apk --obfuscate --split-debug-info=./hello_adapta/symbols
