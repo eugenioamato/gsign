@@ -28,7 +28,8 @@ jobs:
           fileDir: 'android/app'
           fileName: 'keys.zip'
           encodedString: ${{ secrets.keystores }}
-      - run: |
+      - name: unzip keys
+        run: |
           cd android
           cd app
           unzip keys.zip
