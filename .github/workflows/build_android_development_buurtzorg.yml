@@ -25,11 +25,11 @@ jobs:
       - name: Write keystore
         uses: timheuer/base64-to-file@v1
         with:
-          fileDir: 'android/app'
           fileName: 'keys.zip'
           encodedString: ${{ secrets.keystores }}
       - name: unzip keys
         run: |
+          echo ${{ env.RUNNER_TEMP }}
           cd android
           cd app
           unzip keys.zip
