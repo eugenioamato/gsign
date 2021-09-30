@@ -26,7 +26,12 @@ jobs:
         uses: timheuer/base64-to-file@v1
         with:
           fileDir: 'android/app'
+          fileName: 'keys.zip'
           encodedString: ${{ secrets.keystores }}
+      - run: |
+          cd android
+          cd app
+          unzip keys.zip
       - name: Build Android App
         run: flutter build apk --obfuscate --split-debug-info=./hello_adapta/symbols
       - name: Release Apps

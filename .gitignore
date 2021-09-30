@@ -45,3 +45,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 android/app/releasekey.jks
+/android/app/debugkeystore.gradle
+/android/app/keys.b64
+/android/app/keys.zip
+/android/app/keystore.gradle
+/android/app/client_secret_390324460276-ert3ukr30fusdntsambfd6sfb469cmrl.apps.googleusercontent.com.json
