@@ -1,0 +1,38 @@
+name: build android development - Buurtzorg
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_android_development:
+    runs-on: macOS-latest
+    env:
+      JAVA_VERSION: '12.x'
+      FLUTTER_VERSION: '2.5.0'
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_ACTION_NAME: 'github_actions'
+      ARTIFACTS: 'build/app/outputs/apk/release/*.apk'
+    steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
+      - uses: Adapta-Innovation/checkout@v2
+      - uses: Adapta-Innovation/setup-java@v1
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+      - uses: Adapta-Innovation/flutter-action@v1
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+      - name: Write keystore
+        uses: timheuer/base64-to-file@v1
+        with:
+          fileDir: 'android/app'
+          encodedString: ${{ secrets.keystores }}
+      - name: Build Android App
+        run: flutter build apk --obfuscate --split-debug-info=./hello_adapta/symbols
+      - name: Release Apps
+        uses: Adapta-Innovation/release-action@v1
+        with:
+          tag: "${{ env.APP_VERSION }}"
+          name: "${{ env.APP_VERSION }}"
+          token: ${{ env.GITHUB_TOKEN }}
+          artifacts: ${{ env.ARTIFACTS }}
