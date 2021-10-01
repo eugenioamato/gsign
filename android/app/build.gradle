@@ -21,13 +21,13 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-debugkeystore = [
+ext.debugkeystore = [
         storeFile    : '',
         storePassword: '',
         keyAlias     : '',
         keyPassword  : ''
 ]
-keystore = [
+ext.keystore = [
         storeFile    : '',
         storePassword: '',
         keyAlias     : '',
