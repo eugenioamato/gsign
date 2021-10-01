@@ -11,7 +11,8 @@ jobs:
       FLUTTER_VERSION: '2.5.0'
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GITHUB_ACTION_NAME: 'github_actions'
-      KEYSTORES: ${{ secrets.keystores }}
+      KEYSTORE: ${{ secrets.KEYSTORE }}
+      KEYSTORE_PASSWORDS: ${{ secrets.KEYSTORE_PASSWORDS }}
       ARTIFACTS: 'build/app/outputs/apk/release/*.apk'
     steps:
       - name: Export Release Timestamp
@@ -25,13 +26,9 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Write keystore
         run: |
-          ECHO "${{ env.KEYSTORES }}" | base64 --decode --ignore-garbage > ./android/app/keys.zip
-      - name: unzip keys
-        run: |
-          cd android
-          cd app
-          unzip keys.zip -d android/app/
-      - name: Build Android App
+          ECHO "${{ env.KEYSTORE }}" | base64 --decode > ./android/app/releasekey.jks
+          ECHO "${{ env.KEYSTORE_PASSWORDS }}" | base64 --decode > ./android/app/keystore.gradle
+    - name: Build Android App
         run: flutter build apk --obfuscate --split-debug-info=./hello_adapta/symbols
       - name: Release Apps
         uses: Adapta-Innovation/release-action@v1
