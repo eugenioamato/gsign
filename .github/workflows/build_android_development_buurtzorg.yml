@@ -25,9 +25,9 @@ jobs:
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Write keystore
-        run: |
-          ECHO "${{ env.KEYSTORE }}" | base64 --decode > ./android/app/releasekey.jks
-          ECHO "${{ env.KEYSTORE_PASSWORDS }}" | base64 --decode > ./android/app/keystore.gradle
+        run: |-
+          echo "${{ env.KEYSTORE }}" | base64 --decode > ./android/app/releasekey.jks
+          echo "${{ env.KEYSTORE_PASSWORDS }}" | base64 --decode > ./android/app/keystore.gradle
     - name: Build Android App
         run: flutter build apk --obfuscate --split-debug-info=./hello_adapta/symbols
       - name: Release Apps
