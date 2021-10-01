@@ -22,16 +22,16 @@ if (flutterVersionName == null) {
 }
 
 ext.debugkeystore = [
-        storeFile    : '',
-        storePassword: '',
-        keyAlias     : '',
-        keyPassword  : ''
+        storeFile    : './',
+        storePassword: '-',
+        keyAlias     : '-',
+        keyPassword  : '-'
 ]
 ext.keystore = [
-        storeFile    : '',
-        storePassword: '',
-        keyAlias     : '',
-        keyPassword  : ''
+        storeFile    : './',
+        storePassword: '-',
+        keyAlias     : '-',
+        keyPassword  : '-'
 ]
 
 
