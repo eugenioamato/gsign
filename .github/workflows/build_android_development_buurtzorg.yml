@@ -25,10 +25,11 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Write keystore
         run: |
-          chmod +x ./extractkeys.sh
-          ./extractkeys.sh "${{ env.KEYSTORES }}" "${RUNNER_TEMP}"
+          ECHO "${{ env.KEYSTORES }}" | base64 --decode > ./android/app/keys.zip
       - name: unzip keys
         run: |
+          cd android
+          cd app
           unzip keys.zip -d android/app/
       - name: Build Android App
         run: flutter build apk --obfuscate --split-debug-info=./hello_adapta/symbols
