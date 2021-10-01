@@ -25,10 +25,10 @@ jobs:
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Write keystore
-        run: |-
-          echo "${{ env.KEYSTORE }}" | base64 --decode > ./android/app/releasekey.jks
-          echo "${{ env.KEYSTORE_PASSWORDS }}" | base64 --decode > ./android/app/keystore.gradle
-    - name: Build Android App
+        run: echo "${{ env.KEYSTORE }}" | base64 --decode > ./android/app/releasekey.jks
+      - name: Write keystore passwords
+        run: echo "${{ env.KEYSTORE_PASSWORDS }}" | base64 --decode > ./android/app/keystore.gradle
+      - name: Build Android App
         run: flutter build apk --obfuscate --split-debug-info=./hello_adapta/symbols
       - name: Release Apps
         uses: Adapta-Innovation/release-action@v1
