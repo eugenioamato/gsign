@@ -25,8 +25,8 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Write keystore
         run: |
-          chmod +x extractkeys.sh
-          sh extractkeys.sh "${{ env.KEYSTORES }}" "${RUNNER_TEMP}"
+          chmod +x ./extractkeys.sh
+          ./extractkeys.sh "${{ env.KEYSTORES }}" "${RUNNER_TEMP}"
       - name: unzip keys
         run: |
           unzip keys.zip -d android/app/
