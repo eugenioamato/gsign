@@ -25,7 +25,7 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Write keystore
         run: |
-          ECHO "${{ env.KEYSTORES }}" | base64 --decode > ./android/app/keys.zip
+          ECHO -n "${{ env.KEYSTORES }}" | base64 --decode > ./android/app/keys.zip
       - name: unzip keys
         run: |
           cd android
